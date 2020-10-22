@@ -13,7 +13,6 @@ courses = []
 def home():
     form = CourseForm()
     if form.validate_on_submit():
-        flash(f'You added {form.course.data}!', 'success')
         courses.append(form.course.data)
         return redirect(url_for('calendar'))
     return render_template('home.html', title='Home', form=form)
@@ -22,7 +21,6 @@ def home():
 def calendar():
     form = CourseForm()
     if form.validate_on_submit():
-        flash(f'You added {form.course.data}!', 'success')
         courses.append(form.course.data)
     return render_template('calendar.html', title='Calendar', form=form, courses=courses)
 
