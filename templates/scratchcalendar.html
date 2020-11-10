@@ -1,0 +1,654 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="col-md-8">
+        <head>
+            <title>Class Schedule</title>
+            <link rel="stylesheet" type="text/css" href="../static/assets/css/calendar.css" />
+        </head>
+        <body>
+            <h2 class="text-primary">Connecticut College Class Scheduler<br/></h2>
+            <table style="width: 100%;">
+                <body>
+                    <tr>
+                        <th style="width: 110px;">Time</th>
+                        <td style="text-align: center;">MON</td>
+                        <td style="text-align: center;">TUES</td>
+                        <td style="text-align: center;">WED</td>
+                        <td style="text-align: center;">THUR</td>
+                        <td style="text-align: center;">FRI</td>
+                        <td style="text-align: center;">SAT</td>
+                        <td style="text-align: center;">SUN</td>
+                    </tr>
+                    <tr>
+                        <th>8:00 AM</th>
+                        <td id="M800"></td>
+                        <td id="T800"></td>
+                        <td id="W800"></td>
+                        <td id="R800"></td>
+                        <td id="F800"></td>
+                        <td id="SA800"></td>
+                        <td id="SU800"></td>
+                    </tr>
+                    <tr>
+                        <th>8:15 AM</th>
+                        <td id="M815"></td>
+                        <td id="T815"></td>
+                        <td id="W815"></td>
+                        <td id="R815"></td>
+                        <td id="F815"></td>
+                        <td id="SA815"></td>
+                        <td id="SU815"></td>
+                    </tr>
+                    <tr>
+                        <th>8:30 AM</th>
+                        <td id="M830"></td>
+                        <td id="T830"></td>
+                        <td id="W830"></td>
+                        <td id="R830"></td>
+                        <td id="F830"></td>
+                        <td id="SA830"></td>
+                        <td id="SU830"></td>
+                    </tr>
+                    <tr>
+                        <th>8:45 AM</th>
+                        <td id="M845"></td>
+                        <td id="T845"></td>
+                        <td id="W845"></td>
+                        <td id="R845"></td>
+                        <td id="F845"></td>
+                        <td id="SA845"></td>
+                        <td id="SU845"></td>
+                    </tr>
+                    <tr>
+                        <th>9:00 AM</th>
+                        <td id="M900"></td>
+                        <td id="T900"></td>
+                        <td id="W900"></td>
+                        <td id="R900"></td>
+                        <td id="F900"></td>
+                        <td id="SA900"></td>
+                        <td id="SU900"></td>
+                    </tr>
+                    <tr>
+                        <th>9:15 AM</th>
+                        <td id="M915"></td>
+                        <td id="T915"></td>
+                        <td id="W915"></td>
+                        <td id="R915"></td>
+                        <td id="F915"></td>
+                        <td id="SA915"></td>
+                        <td id="SU915"></td>
+                    </tr>
+                    <tr>
+                        <th>9:30 AM</th>
+                        <td id="M930"></td>
+                        <td id="T930"></td>
+                        <td id="W930"></td>
+                        <td id="R930"></td>
+                        <td id="F930"></td>
+                        <td id="SA930"></td>
+                        <td id="SU930"></td>
+                    </tr>
+                    <tr>
+                        <th>9:45 AM</th>
+                        <td id="M945"></td>
+                        <td id="T945"></td>
+                        <td id="W945"></td>
+                        <td id="R945"></td>
+                        <td id="F945"></td>
+                        <td id="SA945"></td>
+                        <td id="SU945"></td>
+                    </tr>
+                    <tr>
+                        <th>10:00 AM</th>
+                        <td id="M1000"></td>
+                        <td id="T1000"></td>
+                        <td id="W1000"></td>
+                        <td id="R1000"></td>
+                        <td id="F1000"></td>
+                        <td id="SA1000"></td>
+                        <td id="SU1000"></td>
+                    </tr>
+                    <tr>
+                        <th>10:15 AM</th>
+                        <td id="M1015"></td>
+                        <td id="T1015"></td>
+                        <td id="W1015"></td>
+                        <td id="R1015"></td>
+                        <td id="F1015"></td>
+                        <td id="SA1015"></td>
+                        <td id="SU1015"></td>
+                    </tr>
+                    <tr>
+                        <th>10:30 AM</th>
+                        <td id="M1030"></td>
+                        <td id="T1030"></td>
+                        <td id="W1030"></td>
+                        <td id="R1030"></td>
+                        <td id="F1030"></td>
+                        <td id="SA1030"></td>
+                        <td id="SU1030"></td>
+                    </tr>
+                    <tr>
+                        <th>10:45 AM</th>
+                        <td id="M1045"></td>
+                        <td id="T1045"></td>
+                        <td id="W1045"></td>
+                        <td id="R1045"></td>
+                        <td id="F1045"></td>
+                        <td id="SA1045"></td>
+                        <td id="SU1045"></td>
+                    </tr>
+                    <tr>
+                        <th>11:00 AM</th>
+                        <td id="M1100"></td>
+                        <td id="T1100"></td>
+                        <td id="W1100"></td>
+                        <td id="R1100"></td>
+                        <td id="F1100"></td>
+                        <td id="SA1100"></td>
+                        <td id="SU1100"></td>
+                    </tr>
+                    <tr>
+                        <th>11:15 AM</th>
+                        <td id="M1115"></td>
+                        <td id="T1115"></td>
+                        <td id="W1115"></td>
+                        <td id="R1115"></td>
+                        <td id="F1115"></td>
+                        <td id="SA1115"></td>
+                        <td id="SU1115"></td>
+                    </tr>
+                    <tr>
+                        <th>11:30 AM</th>
+                        <td id="M1130"></td>
+                        <td id="T1130"></td>
+                        <td id="W1130"></td>
+                        <td id="R1130"></td>
+                        <td id="F1130"></td>
+                        <td id="SA1130"></td>
+                        <td id="SU1130"></td>
+                    </tr>
+                    <tr>
+                        <th>11:45 AM</th>
+                        <td id="M1145"></td>
+                        <td id="T1145"></td>
+                        <td id="W1145"></td>
+                        <td id="R1145"></td>
+                        <td id="F1145"></td>
+                        <td id="SA1145"></td>
+                        <td id="SU1145"></td>
+                    </tr>
+                    <tr>
+                        <th>12:00 AM</th>
+                        <td id="M1200"></td>
+                        <td id="T1200"></td>
+                        <td id="W1200"></td>
+                        <td id="R1200"></td>
+                        <td id="F1200"></td>
+                        <td id="SA1200"></td>
+                        <td id="SU1200"></td>
+                    </tr>
+                    <tr>
+                        <th>12:15 AM</th>
+                        <td id="M1215"></td>
+                        <td id="T1215"></td>
+                        <td id="W1215"></td>
+                        <td id="R1215"></td>
+                        <td id="F1215"></td>
+                        <td id="SA1215"></td>
+                        <td id="SU1215"></td>
+                    </tr>
+                    <tr>
+                        <th>12:30 AM</th>
+                        <td id="M1230"></td>
+                        <td id="T1230"></td>
+                        <td id="W1230"></td>
+                        <td id="R1230"></td>
+                        <td id="F1230"></td>
+                        <td id="SA1230"></td>
+                        <td id="SU1230"></td>
+                    </tr>
+                    <tr>
+                        <th>12:45 AM</th>
+                        <td id="M1245"></td>
+                        <td id="T1245"></td>
+                        <td id="W1245"></td>
+                        <td id="R1245"></td>
+                        <td id="F1245"></td>
+                        <td id="SA1245"></td>
+                        <td id="SU1245"></td>
+                    </tr>
+                    <tr>
+                        <th>1:00 PM</th>
+                        <td id="M1300"></td>
+                        <td id="T1300"></td>
+                        <td id="W1300"></td>
+                        <td id="R1300"></td>
+                        <td id="F1300"></td>
+                        <td id="SA1300"></td>
+                        <td id="SU1300"></td>
+                    </tr>
+                    <tr>
+                        <th>1:15 PM</th>
+                        <td id="M1315"></td>
+                        <td id="T1315"></td>
+                        <td id="W1315"></td>
+                        <td id="R1315"></td>
+                        <td id="F1315"></td>
+                        <td id="SA1315"></td>
+                        <td id="SU1315"></td>
+                    </tr>
+                    <tr>
+                        <th>1:30 PM</th>
+                        <td id="M1330"></td>
+                        <td id="T1330"></td>
+                        <td id="W1330"></td>
+                        <td id="R1330"></td>
+                        <td id="F1330"></td>
+                        <td id="SA1330"></td>
+                        <td id="SU1330"></td>
+                    </tr>
+                    <tr>
+                        <th>1:45 PM</th>
+                        <td id="M1345"></td>
+                        <td id="T1345"></td>
+                        <td id="W1345"></td>
+                        <td id="R1345"></td>
+                        <td id="F1345"></td>
+                        <td id="SA1345"></td>
+                        <td id="SU1345"></td>
+                    </tr>
+                    <tr>
+                        <th>2:00 PM</th>
+                        <td id="M1400"></td>
+                        <td id="T1400"></td>
+                        <td id="W1400"></td>
+                        <td id="R1400"></td>
+                        <td id="F1400"></td>
+                        <td id="SA1400"></td>
+                        <td id="SU1400"></td>
+                    </tr>
+                    <tr>
+                        <th>2:15 PM</th>
+                        <td id="M1415"></td>
+                        <td id="T1415"></td>
+                        <td id="W1415"></td>
+                        <td id="R1415"></td>
+                        <td id="F1415"></td>
+                        <td id="SA1415"></td>
+                        <td id="SU1415"></td>
+                    </tr>
+                    <tr>
+                        <th>2:30 PM</th>
+                        <td id="M1430"></td>
+                        <td id="T1430"></td>
+                        <td id="W1430"></td>
+                        <td id="R1430"></td>
+                        <td id="F1430"></td>
+                        <td id="SA1430"></td>
+                        <td id="SU1430"></td>
+                    </tr>
+                    <tr>
+                        <th>2:45 PM</th>
+                        <td id="M1445"></td>
+                        <td id="T1445"></td>
+                        <td id="W1445"></td>
+                        <td id="R1445"></td>
+                        <td id="F1445"></td>
+                        <td id="SA1445"></td>
+                        <td id="SU1445"></td>
+                    </tr>
+                    <tr>
+                        <th>3:00 PM</th>
+                        <td id="M1500"></td>
+                        <td id="T1500"></td>
+                        <td id="W1500"></td>
+                        <td id="R1500"></td>
+                        <td id="F1500"></td>
+                        <td id="SA1500"></td>
+                        <td id="SU1500"></td>
+                    </tr>
+                    <tr>
+                        <th>3:15 PM</th>
+                        <td id="M1515"></td>
+                        <td id="T1515"></td>
+                        <td id="W1515"></td>
+                        <td id="R1515"></td>
+                        <td id="F1515"></td>
+                        <td id="SA1515"></td>
+                        <td id="SU1515"></td>
+                    </tr>
+                    <tr>
+                        <th>3:30 PM</th>
+                        <td id="M1530"></td>
+                        <td id="T1530"></td>
+                        <td id="W1530"></td>
+                        <td id="R1530"></td>
+                        <td id="F1530"></td>
+                        <td id="SA1530"></td>
+                        <td id="SU1530"></td>
+                    </tr>
+                    <tr>
+                        <th>3:45 PM</th>
+                        <td id="M1545"></td>
+                        <td id="T1545"></td>
+                        <td id="W1545"></td>
+                        <td id="R1545"></td>
+                        <td id="F1545"></td>
+                        <td id="SA1545"></td>
+                        <td id="SU1545"></td>
+                    </tr>
+                    <tr>
+                        <th>4:00 PM</th>
+                        <td id="M1600"></td>
+                        <td id="T1600"></td>
+                        <td id="W1600"></td>
+                        <td id="R1600"></td>
+                        <td id="F1600"></td>
+                        <td id="SA1600"></td>
+                        <td id="SU1600"></td>
+                    </tr>
+                    <tr>
+                        <th>4:15 PM</th>
+                        <td id="M1615"></td>
+                        <td id="T1615"></td>
+                        <td id="W1615"></td>
+                        <td id="R1615"></td>
+                        <td id="F1615"></td>
+                        <td id="SA1615"></td>
+                        <td id="SU1615"></td>
+                    </tr>
+                    <tr>
+                        <th>4:30 PM</th>
+                        <td id="M1630"></td>
+                        <td id="T1630"></td>
+                        <td id="W1630"></td>
+                        <td id="R1630"></td>
+                        <td id="F1630"></td>
+                        <td id="SA1630"></td>
+                        <td id="SU1630"></td>
+                    </tr>
+                    <tr>
+                        <th>4:45 PM</th>
+                        <td id="M1645"></td>
+                        <td id="T1645"></td>
+                        <td id="W1645"></td>
+                        <td id="R1645"></td>
+                        <td id="F1645"></td>
+                        <td id="SA1645"></td>
+                        <td id="SU1645"></td>
+                    </tr>
+                    <tr>
+                        <th>5:00 PM</th>
+                        <td id="M1700"></td>
+                        <td id="T1700"></td>
+                        <td id="W1700"></td>
+                        <td id="R1700"></td>
+                        <td id="F1700"></td>
+                        <td id="SA1700"></td>
+                        <td id="SU1700"></td>
+                    </tr>
+                    <tr>
+                        <th>5:15 PM</th>
+                        <td id="M1715"></td>
+                        <td id="T1715"></td>
+                        <td id="W1715"></td>
+                        <td id="R1715"></td>
+                        <td id="F1715"></td>
+                        <td id="SA1715"></td>
+                        <td id="SU1715"></td>
+                    </tr>
+                    <tr>
+                        <th>5:30 PM</th>
+                        <td id="M1730"></td>
+                        <td id="T1730"></td>
+                        <td id="W1730"></td>
+                        <td id="R1730"></td>
+                        <td id="F1730"></td>
+                        <td id="SA1730"></td>
+                        <td id="SU1730"></td>
+                    </tr>
+                    <tr>
+                        <th>5:45 PM</th>
+                        <td id="M1745"></td>
+                        <td id="T1745"></td>
+                        <td id="W1745"></td>
+                        <td id="R1745"></td>
+                        <td id="F1745"></td>
+                        <td id="SA1745"></td>
+                        <td id="SU1745"></td>
+                    </tr>
+                    <tr>
+                        <th>6:00 PM</th>
+                        <td id="M1800"></td>
+                        <td id="T1800"></td>
+                        <td id="W1800"></td>
+                        <td id="R1800"></td>
+                        <td id="F1800"></td>
+                        <td id="SA1800"></td>
+                        <td id="SU1800"></td>
+                    </tr>
+                    <tr>
+                        <th>6:15 PM</th>
+                        <td id="M1815"></td>
+                        <td id="T1815"></td>
+                        <td id="W1815"></td>
+                        <td id="R1815"></td>
+                        <td id="F1815"></td>
+                        <td id="SA1815"></td>
+                        <td id="SU1815"></td>
+                    </tr>
+                    <tr>
+                        <th>6:30 PM</th>
+                        <td id="M1830"></td>
+                        <td id="T1830"></td>
+                        <td id="W1830"></td>
+                        <td id="R1830"></td>
+                        <td id="F1830"></td>
+                        <td id="SA1830"></td>
+                        <td id="SU1830"></td>
+                    </tr>
+                    <tr>
+                        <th>6:45 PM</th>
+                        <td id="M1845"></td>
+                        <td id="T1845"></td>
+                        <td id="W1845"></td>
+                        <td id="R1845"></td>
+                        <td id="F1845"></td>
+                        <td id="SA1845"></td>
+                        <td id="SU1845"></td>
+                    </tr>
+                    <tr>
+                        <th>7:00 PM</th>
+                        <td id="M1900"></td>
+                        <td id="T1900"></td>
+                        <td id="W1900"></td>
+                        <td id="R1900"></td>
+                        <td id="F1900"></td>
+                        <td id="SA1900"></td>
+                        <td id="SU1900"></td>
+                    </tr>
+                    <tr>
+                        <th>7:15 PM</th>
+                        <td id="M1915"></td>
+                        <td id="T1915"></td>
+                        <td id="W1915"></td>
+                        <td id="R1915"></td>
+                        <td id="F1915"></td>
+                        <td id="SA1915"></td>
+                        <td id="SU1915"></td>
+                    </tr>
+                    <tr>
+                        <th>7:30 PM</th>
+                        <td id="M1930"></td>
+                        <td id="T1930"></td>
+                        <td id="W1930"></td>
+                        <td id="R1930"></td>
+                        <td id="F1930"></td>
+                        <td id="SA1930"></td>
+                        <td id="SU1930"></td>
+                    </tr>
+                    <tr>
+                        <th>7:45 PM</th>
+                        <td id="M1945"></td>
+                        <td id="T1945"></td>
+                        <td id="W1945"></td>
+                        <td id="R1945"></td>
+                        <td id="F1945"></td>
+                        <td id="SA1945"></td>
+                        <td id="SU1945"></td>
+                    </tr>
+                    <tr>
+                        <th>8:00 PM</th>
+                        <td id="M2000"></td>
+                        <td id="T2000"></td>
+                        <td id="W2000"></td>
+                        <td id="R2000"></td>
+                        <td id="F2000"></td>
+                        <td id="SA2000"></td>
+                        <td id="SU2000"></td>
+                    </tr>
+                    <tr>
+                        <th>8:15 PM</th>
+                        <td id="M2015"></td>
+                        <td id="T2015"></td>
+                        <td id="W2015"></td>
+                        <td id="R2015"></td>
+                        <td id="F2015"></td>
+                        <td id="SA2015"></td>
+                        <td id="SU2015"></td>
+                    </tr>
+                    <tr>
+                        <th>8:30 PM</th>
+                        <td id="M2030"></td>
+                        <td id="T2030"></td>
+                        <td id="W2030"></td>
+                        <td id="R2030"></td>
+                        <td id="F2030"></td>
+                        <td id="SA2030"></td>
+                        <td id="SU2030"></td>
+                    </tr>
+                    <tr>
+                        <th>8:45 PM</th>
+                        <td id="M2045"></td>
+                        <td id="T2045"></td>
+                        <td id="W2045"></td>
+                        <td id="R2045"></td>
+                        <td id="F2045"></td>
+                        <td id="SA2045"></td>
+                        <td id="SU2045"></td>
+                    </tr>
+                    <tr>
+                        <th>9:00 PM</th>
+                        <td id="M2100"></td>
+                        <td id="T2100"></td>
+                        <td id="W2100"></td>
+                        <td id="R2100"></td>
+                        <td id="F2100"></td>
+                        <td id="SA2100"></td>
+                        <td id="SU2100"></td>
+                    </tr>
+                    <tr>
+                        <th>9:15 PM</th>
+                        <td id="M2115"></td>
+                        <td id="T2115"></td>
+                        <td id="W2115"></td>
+                        <td id="R2115"></td>
+                        <td id="F2115"></td>
+                        <td id="SA2115"></td>
+                        <td id="SU2115"></td>
+                    </tr>
+                    <tr>
+                        <th>9:30 PM</th>
+                        <td id="M2130"></td>
+                        <td id="T2130"></td>
+                        <td id="W2130"></td>
+                        <td id="R2130"></td>
+                        <td id="F2130"></td>
+                        <td id="SA2130"></td>
+                        <td id="SU2130"></td>
+                    </tr>
+                    <tr>
+                        <th>9:45 PM</th>
+                        <td id="M2145"></td>
+                        <td id="T2145"></td>
+                        <td id="W2145"></td>
+                        <td id="R2145"></td>
+                        <td id="F2145"></td>
+                        <td id="SA2145"></td>
+                        <td id="SU2145"></td>
+                    </tr>
+                </body>
+            </table>
+            <script>
+                var ds = ["M", "T", "W", "R", "F", "SA", "SU"];
+                var colors = ["course-one", "course-two", "course-three", "course-four", "course-five", "course-six"]
+                var courses = JSON.parse('{{ courses | tojson | safe }}');
+                console.log(courses);
+                for(j=0; j<courses.length; j++){
+                    console.log(j)
+                    var course = courses[j];
+                    var times = course.times;
+                    var days = course.days;
+
+                    var start = parseInt(times.split("-")[0]);
+                    var end = parseInt(times.split("-")[1]);
+
+                    var startm = start % 100;
+                    var endm = end % 100;
+
+                    if(startm % 15 != 0){
+                        var startmround = (((startm + 7.5)/15 | 0) * 15) % 60;
+                        start = start - startm + startmround;
+                    }
+                    if(endm % 15 != 0)
+                    {
+                        var endmround = (((endm + 7.5)/15 | 0) * 15) % 60;
+                        end = end - endm + endmround;
+                    }
+                    var d;
+                    for(d of ds){
+                        if (days.includes(d)){
+                            document.getElementById(d+start).innerHTML = course.title;
+                            var i = start;
+                            var b = 0;
+                            while(i < end){
+                                var str = d + i;
+                                document.getElementById(str).className = colors[j];
+                                if(b == 1){
+                                    document.getElementById(str).innerHTML = course.times;
+                                }
+                                if(i % 100 == 45){
+                                    i += 55;
+                                }
+                                else{
+                                    i += 15;
+                                }
+                                b+=1;
+                            }
+                        }
+                    }
+                }
+            </script>
+        </body>
+    </div>
+    <div class="col-md-4">
+        <div class="content-section">
+          <h4>Add a course</h4>
+          <form method="POST" action="">
+              {{ form.hidden_tag() }}
+              <fieldset class="form-group">
+                  <legend>Select a Course</legend>
+                  <div class="form-group">
+                      {{ form.course.label(class="form-control-label") }}
+                      {{ form.course(class="form-control form-control-lg") }}
+                  </div>
+              </fieldset>
+              <div class="form-group">
+                  {{ form.submit(class="btn btn-outline-info") }}
+              </div>
+          </form>
+        </div>
+    </div>
+{% endblock content %}

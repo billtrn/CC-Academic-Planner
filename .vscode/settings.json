@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/chelseavickers/opt/anaconda3/envs/research/bin/python"
+    "python.pythonPath": "/Users/chelseavickers/opt/anaconda3/envs/research/bin/python",
+    "compile-hero.disable-compile-files-on-did-save-code": false
 }
