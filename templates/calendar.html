@@ -583,7 +583,7 @@
             </table>
             <script>
                 var ds = ["M", "T", "W", "R", "F", "SA", "SU"];
-                var colors = ["course-one", "course-two", "course-three", "course-four", "course-five", "course-six"]
+                var colors = ["course-one", "course-two", "course-three", "course-four", "course-five", "course-six", "course-seven", "course-eight"]
                 var courses = JSON.parse('{{ courses | tojson | safe }}');
                 console.log(courses);
                 for(j=0; j<courses.length; j++){
@@ -591,41 +591,45 @@
                     var course = courses[j];
                     var times = course.times;
                     var days = course.days;
-
-                    var start = parseInt(times.split("-")[0]);
-                    var end = parseInt(times.split("-")[1]);
-
-                    var startm = start % 100;
-                    var endm = end % 100;
-
-                    if(startm % 15 != 0){
-                        var startmround = (((startm + 7.5)/15 | 0) * 15) % 60;
-                        start = start - startm + startmround;
-                    }
-                    if(endm % 15 != 0)
+                    
+                    for(x=0; x<days.length; x++)
                     {
-                        var endmround = (((endm + 7.5)/15 | 0) * 15) % 60;
-                        end = end - endm + endmround;
-                    }
-                    var d;
-                    for(d of ds){
-                        if (days.includes(d)){
-                            document.getElementById(d+start).innerHTML = course.title;
-                            var i = start;
-                            var b = 0;
-                            while(i < end){
-                                var str = d + i;
-                                document.getElementById(str).className = colors[j];
-                                if(b == 1){
-                                    document.getElementById(str).innerHTML = course.times;
+                        var start = parseInt(times[x].split("-")[0]);
+                        var end = parseInt(times[x].split("-")[1]);
+
+                        var startm = start % 100;
+                        var endm = end % 100;
+
+                        if(startm % 15 != 0){
+                            var startmround = (((startm + 7.5)/15 | 0) * 15) % 60;
+                            start = start - startm + startmround;
+                        }
+                        if(endm % 15 != 0)
+                        {
+                            var endmround = (((endm + 7.5)/15 | 0) * 15) % 60;
+                            end = end - endm + endmround;
+                        }
+
+                        var d;
+                        for(d of ds){
+                            if (days[x].includes(d)){
+                                document.getElementById(d+start).innerHTML = course.title;
+                                var i = start;
+                                var b = 0;
+                                while(i < end){
+                                    var str = d + i;
+                                    document.getElementById(str).className = colors[j];
+                                    if(b == 1){
+                                        document.getElementById(str).innerHTML = course.times[x];
+                                    }
+                                    if(i % 100 == 45){
+                                        i += 55;
+                                    }
+                                    else{
+                                        i += 15;
+                                    }
+                                    b+=1;
                                 }
-                                if(i % 100 == 45){
-                                    i += 55;
-                                }
-                                else{
-                                    i += 15;
-                                }
-                                b+=1;
                             }
                         }
                     }
@@ -635,20 +639,23 @@
     </div>
     <div class="col-md-4">
         <div class="content-section">
-          <h4>Add a course</h4>
-          <form method="POST" action="">
-              {{ form.hidden_tag() }}
-              <fieldset class="form-group">
-                  <legend>Select a Course</legend>
-                  <div class="form-group">
-                      {{ form.course.label(class="form-control-label") }}
-                      {{ form.course(class="form-control form-control-lg") }}
-                  </div>
-              </fieldset>
-              <div class="form-group">
-                  {{ form.submit(class="btn btn-outline-info") }}
-              </div>
-          </form>
+            <h4>Add a course</h4>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend>Select a Course</legend>
+                    <div class="form-group">
+                        {{ form.course.label(class="form-control-label") }}
+                        {{ form.course(class="form-control form-control-lg") }}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </form>
         </div>
+        {% if error %}
+            <p class=error><strong>Error:</strong> {{ error }}
+        {% endif %}
     </div>
 {% endblock content %}
