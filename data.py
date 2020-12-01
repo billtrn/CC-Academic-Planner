@@ -18,6 +18,12 @@ def getAttr(crn):
 def getCRN(title):
     return catalog.loc[catalog['TITLE'] == title]['CRN'].tolist()[0]
 
+def getNumber(crn):
+    return catalog.loc[catalog['CRN'] == crn]['#'].tolist()[0]
+
+def getDepartment(crn):
+    return catalog.loc[catalog['CRN'] == crn]['Dept'].tolist()[0]
+
 def getDays(crn):
     days = [catalog.loc[catalog['CRN'] == crn]['Days1'].tolist()[0]]
 

@@ -19,10 +19,12 @@ def fmat(course):
         title = title + "," + (course.split(","))[i]
 
     crn = data.getCRN(title)
+    number = data.getNumber(crn)
+    dept = data.getDepartment(crn)
     days = data.getDays(crn)
     times = data.getTimes(crn)
 
-    return {"title": title, "crn": crn, "days": days, "times": times}
+    return {"title": title, "crn": crn, "dept": dept, "number": number, "days": days, "times": times}
 
 #function to check if the course has a conflict with an already selected course
 def conflict(course):
@@ -115,7 +117,5 @@ def calendar():
     return render_template('calendar.html', title='Calendar', form=form, courses=courses, error=error)
 
 if __name__ == "__main__":
-    #app.run(debug=True, host='192.168.1.209')
-    app.run(host='0.0.0.0')
-
-#192.168.1.209
+    app.run(debug=True, host='192.168.1.209')
+    #app.run(host='0.0.0.0')

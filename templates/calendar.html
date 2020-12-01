@@ -613,14 +613,28 @@
                         var d;
                         for(d of ds){
                             if (days[x].includes(d)){
-                                document.getElementById(d+start).innerHTML = course.title;
+                                document.getElementById(d+start).innerHTML = course.dept + " " + course.number + "<br>" + course.title;
                                 var i = start;
                                 var b = 0;
                                 while(i < end){
                                     var str = d + i;
                                     document.getElementById(str).className = colors[j];
+
                                     if(b == 1){
-                                        document.getElementById(str).innerHTML = course.times[x];
+                                        var split = course.times[x].split("-");
+                                        var start_string = split[0].substring(0,2) + ":" + split[0].substring(2,4);
+                                        var end_string = split[1].substring(0,2) + ":" + split[1].substring(2,4);
+
+                                        var start_int = parseInt(split[0]);
+                                        var end_int = parseInt(split[1]);
+                                        if(start_int/100 > 12){
+                                            start_string = (Math.floor(start_int/100)-12) + ":" + split[0].substring(2,4);
+                                        }
+                                        if(end_int/100 > 12){
+                                            end_string = (Math.floor(end_int/100)-12) + ":" + split[1].substring(2,4);
+                                        }   
+                                        
+                                        document.getElementById(str).innerHTML = start_string + " - " + end_string;
                                     }
                                     if(i % 100 == 45){
                                         i += 55;
