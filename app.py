@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for
-from forms import CourseForm
+from forms import CourseForm, ClearForm
 import json
 import data
 
@@ -105,7 +105,9 @@ def home():
 
 @app.route("/calendar", methods=['GET', 'POST'])
 def calendar():
+    global courses
     form = CourseForm()
+    form_clear = ClearForm()
     error = None
 
     #if the form is submitted validly
@@ -121,8 +123,11 @@ def calendar():
         else:
             error = 'The selected class, ' + course["title"] + ' (' + ''.join(course["days"]) + ', ' + ''.join(course["times"]) + '),' + ' conflicts with one or more classes in your current schedule.'
 
-    return render_template('calendar.html', title='Calendar', form=form, courses=courses, error=error)
+    if form_clear.validate_on_submit():
+        if form_clear.clear.data:
+            courses = []
+
+    return render_template('calendar.html', title='Calendar', form=form, cform = form_clear, courses=courses, error=error)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='192.168.1.209')
-    #app.run(host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')

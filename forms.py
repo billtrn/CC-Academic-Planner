@@ -8,3 +8,6 @@ COURSE_CHOICES = data.getCourseList()
 class CourseForm(FlaskForm):
     course = SelectField(label='Course', choices=COURSE_CHOICES)
     submit = SubmitField('Add Course')
+
+class ClearForm(FlaskForm):
+    clear = SubmitField('Clear Course Selection')

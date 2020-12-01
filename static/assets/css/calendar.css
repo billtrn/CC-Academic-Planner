@@ -10,6 +10,7 @@ body {
             flex-direction: column;
     min-height: 100vh;
     padding-top: 4rem;
+    padding-left: 2rem;
     font-family: -system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
@@ -21,7 +22,7 @@ body {
   position: sticky;
   top: 0;
 } */
-.tableWrapper {
+/* .tableWrapper {
   position:relative;
   width:100%;
   min-height:1px;
@@ -31,22 +32,23 @@ body {
   -ms-flex:0 0 75%;
   flex:0 0 75%;
   max-width:75%;
-}
+} */
 
 table {
-  border-collapse: collapse;
-  table-layout: auto;
   width: 100%;
+  table-layout: fixed;
+  padding-left: 2rem;
 }
 table th,
 table td {
+  width: 100%;
   text-align: center;
   border-bottom: thin dotted #ccc;
   padding: 0.2rem;
 }
 table th {
-  position: sticky;
-  top: 0;
+  /* position: sticky; */
+  /* top: 0; */
   font-weight: bold;
   font-size: medium;
 }
