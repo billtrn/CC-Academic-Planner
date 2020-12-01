@@ -12,19 +12,26 @@ courses = []
 
 #function to format form.course.data into a dictionary of data for the course
 def fmat(course):
-    title = (course.split(","))[0]
+    split = course.split("  ")
 
-    #in case the title has commas in it
-    for i in range (1, len(course.split(","))-1):
-        title = title + "," + (course.split(","))[i]
+    dept = split[0]
+    num = split[1]
+    title = split[2]
+    sect = split[3]
+    crn = data.getCRN(dept, num, sect)
 
-    crn = data.getCRN(title)
-    number = data.getNumber(crn)
-    dept = data.getDepartment(crn)
+    # #in case the title has commas in it
+    # for i in range (1, len(course.split(","))-1):
+    #     title = title + "," + (course.split(","))[i]
+
+    # crn = data.getCRN(title)
+    # number = data.getNumber(crn)
+    # dept = data.getDepartment(crn)
+
     days = data.getDays(crn)
     times = data.getTimes(crn)
 
-    return {"title": title, "crn": crn, "dept": dept, "number": number, "days": days, "times": times}
+    return {"title": title, "crn": crn, "dept": dept, "number": num, "days": days, "times": times}
 
 #function to check if the course has a conflict with an already selected course
 def conflict(course):
