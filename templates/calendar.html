@@ -583,7 +583,7 @@
             </table>
             <script>
                 var ds = ["M", "T", "W", "R", "F", "SA", "SU"];
-                var colors = ["course-one", "course-two", "course-three", "course-four", "course-five", "course-six", "course-seven", "course-eight"]
+                var colors = ["course-one", "course-two", "course-three", "course-four", "course-five", "course-six", "course-seven", "course-eight", "course-nine", "course-ten"]
                 var courses = JSON.parse('{{ courses | tojson | safe }}');
                 console.log(courses);
                 for(j=0; j<courses.length; j++){
@@ -619,15 +619,18 @@
 
                                 var start_int = parseInt(split[0]);
                                 var end_int = parseInt(split[1]);
-                                if(start_int/100 > 12){
+                                if(start_int/100 >= 13){
                                     start_string = (Math.floor(start_int/100)-12) + ":" + split[0].substring(2,4);
                                 }
-                                if(end_int/100 > 12){
+                                if(end_int/100 >= 13){
                                     end_string = (Math.floor(end_int/100)-12) + ":" + split[1].substring(2,4);
                                 }
                                 var i = start;
                                 var b = 0;
                                 while(i < end){
+                                    if(b>0){
+                                        document.getElementById(d+i).remove();
+                                    }
                                     if(i % 100 == 45){
                                         i += 55;
                                     }
@@ -638,7 +641,9 @@
                                 }
                                 document.getElementById(d+start).rowSpan = b+1;
                                 document.getElementById(d+start).innerHTML = course.dept + " " + course.number + "<br>" + course.title + "<br>" + start_string + " - " + end_string;
-                                document.getElementById(d+start).className = colors[j];
+                                color = j%10;
+                                document.getElementById(d+start).className = colors[color];
+
                             }
                         }
                     }

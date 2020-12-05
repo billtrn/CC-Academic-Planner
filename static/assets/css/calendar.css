@@ -80,15 +80,15 @@ table td > span {
 }
 
 .course-three {
-  background-color: #FF8A65;
+  background-color: #f3684f;
 }
 
 .course-four {
-  background-color: #B3E5FC;
+  background-color: #69d6ac;
 }
 
 .course-five {
-  background-color: #81D4FA;
+  background-color: #faf281;
 }
 
 .course-six {
@@ -96,11 +96,19 @@ table td > span {
 }
 
 .course-seven {
-  background-color: purple;
+  background-color: #a970b8;
 }
 
 .course-eight {
   background-color: pink;
+}
+
+.course-nine {
+  background-color: #909697;
+}
+
+.course-ten {
+  background-color: #3167b8;
 }
 
 #smaller {
