@@ -1,6 +1,5 @@
-from flask import Flask, render_template, flash, redirect, url_for
-from forms import CourseForm, ClearForm
-import json
+from flask import Flask, render_template, jsonify, request, redirect, url_for
+from forms import CourseForm, ClearForm, StartForm
 import data
 
 app = Flask(__name__)
@@ -19,15 +18,6 @@ def fmat(course):
     title = split[2]
     sect = split[3]
     crn = data.getCRN(dept, num, sect)
-
-    # #in case the title has commas in it
-    # for i in range (1, len(course.split(","))-1):
-    #     title = title + "," + (course.split(","))[i]
-
-    # crn = data.getCRN(title)
-    # number = data.getNumber(crn)
-    # dept = data.getDepartment(crn)
-
     days = data.getDays(crn)
     times = data.getTimes(crn)
 
@@ -79,55 +69,50 @@ def conflict(course):
     #no conflict was found, return False
     return False
 
-
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def home():
-    form = CourseForm()
-    error = None
-
-    #if the form is submitted validly
-    if form.validate_on_submit():
-        #reformat the form data into a dictionary of course info
-        course = fmat(form.course.data)
-
-        #if the course does not conflict with any pre-selected classes, add it to the class schedule
-        if conflict(course) is False:
-            courses.append(course)
-            #go to calendar view
+    form = StartForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
             return redirect(url_for('calendar'))
-
-        #if there are one or more conflicts with the current class schedule, do not add it and report conflict
-        else:
-            error = 'The selected class, ' + course["title"] + ' (' + ''.join(course["days"]) + ', ' + ''.join(course["times"]) + '),' + ' conflicts with one or more classes in your current schedule.'
-
-    return render_template('home.html', title='Home', form=form, error=error)
+    return render_template('home.html', title='Home', form=form)
 
 @app.route("/calendar", methods=['GET', 'POST'])
 def calendar():
     global courses
     form = CourseForm()
+    if form.department.data == None:
+        form.course.choices = data.getDeptCourses('ALL DEPTS')
+    else:
+        form.course.choices = data.getDeptCourses(form.department.data)
     form_clear = ClearForm()
     error = None
 
     #if the form is submitted validly
-    if form.validate_on_submit():
-        #reformat the form data into a dictionary of course info
-        course = fmat(form.course.data)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            #reformat the form data into a dictionary of course info
+            course = fmat(form.course.data)
 
-        #if the course does not conflict with any pre-selected classes, add it to the class schedule
-        if conflict(course) is False:
-            courses.append(course)
+            #if the course does not conflict with any pre-selected classes, add it to the class schedule
+            if conflict(course) is False:
+                courses.append(course)
 
-        #if there are one or more conflicts with the current class schedule, do not add it and report conflict
-        else:
-            error = 'The selected class, ' + course["title"] + ' (' + ''.join(course["days"]) + ', ' + ''.join(course["times"]) + '),' + ' conflicts with one or more classes in your current schedule.'
+            #if there are one or more conflicts with the current class schedule, do not add it and report conflict
+            else:
+                error = 'The selected class, ' + course["title"] + ' (' + ''.join(course["days"]) + ', ' + ''.join(course["times"]) + '),' + ' conflicts with one or more classes in your current schedule.'
 
-    if form_clear.validate_on_submit():
-        if form_clear.clear.data:
-            courses = []
+        if form_clear.validate_on_submit():
+            if form_clear.clear.data:
+                courses = []
 
     return render_template('calendar.html', title='Calendar', form=form, cform = form_clear, courses=courses, error=error)
+
+@app.route('/course/<dept>')
+def course(dept):
+    cs = data.getDeptCourses(dept)
+    return jsonify({'courses' : cs})
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

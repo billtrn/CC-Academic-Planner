@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="row">
     <div class="col-md-9">
         <head>
             <title>Class Schedule</title>
@@ -640,7 +641,7 @@
                                     b+=1;
                                 }
                                 document.getElementById(d+start).rowSpan = b+1;
-                                document.getElementById(d+start).innerHTML = course.dept + " " + course.number + "<br>" + course.title + "<br>" + start_string + " - " + end_string;
+                                document.getElementById(d+start).innerHTML = course.dept + " " + course.number + "<br>" + course.title + "<br>" + start_string + " - " + end_string + "<br> <br> CRN: " + course.crn;
                                 color = j%10;
                                 document.getElementById(d+start).className = colors[color];
 
@@ -657,11 +658,30 @@
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
-                    <legend>Select a Course</legend>
                     <div class="form-group">
+                        {{ form.department.label(class="form-control-label") }}
+                        {{ form.department(class="form-control form-control-lg", style="font-size: small") }}
                         {{ form.course.label(class="form-control-label") }}
-                        {{ form.course(class="form-control form-control-lg", id='smaller') }}
+                        {{ form.course(class="form-control form-control-lg", style="font-size: small") }}
                     </div>
+                    <script>
+                        let dept_select = document.getElementById('department');
+                        let course_select = document.getElementById('course');
+            
+                        dept_select.onchange = function() {
+                            dept = dept_select.value;
+                            
+                            fetch('/course/' + dept).then(function(response) {
+                                response.json().then(function(data) {
+                                    let optionHTML = '';
+                                    for (let course of data.courses) {
+                                        optionHTML += '<option value="' + course + '">' + course + '</option>';
+                                    }
+                                    course_select.innerHTML = optionHTML;
+                                })
+                            });
+                        }
+                    </script>
                 </fieldset>
                 <div class="form-group">
                     {{ form.submit(class="btn btn-outline-info") }}
@@ -680,4 +700,5 @@
             <p class=error><strong>Error:</strong> {{ error }}
         {% endif %}
     </div>
+</div>
 {% endblock content %}

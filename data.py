@@ -1,22 +1,36 @@
 import pandas as pd
-import os
 import numpy as np
 
 catalog = pd.read_csv('updatedspring21.csv')
 catalog = catalog.replace(np.nan, '', regex=True)
 attributes = pd.read_csv('updatedspring21attributes.csv')
 
+def toString(i):
+    return catalog['Dept'][i] + "  " + catalog['#'][i] + "  " + catalog['TITLE'][i] + "  " + str(catalog['Sec'][i])
+
+def getDepartmentList():
+    return catalog['Dept'].unique().tolist()
+
 def getCourseList():
     cl = []
-    for i in range(catalog['TITLE'].size):
-        cl.append(catalog['Dept'][i] + "  " + catalog['#'][i] + "  " + catalog['TITLE'][i] + "  " + str(catalog['Sec'][i]))
+    for i in range(catalog.shape[0]):
+        cl.append(toString(i))
     return cl
+
+def getDeptCourses(dept):
+    if dept == 'ALL DEPTS':
+        return getCourseList()
+    else:
+        dc = catalog[catalog['Dept'] == dept]
+        l = []
+        for index, row in dc.iterrows():
+            l.append(toString(index))
+        return l
 
 def getAttr(crn):
     return attributes.loc[attributes['SSRATTR_CRN'] == crn]['SSRATTR_ATTR_CODE'].tolist()
 
 def getCRN(dept, num, sect):
-    #print(catalog.loc[(catalog['Dept'] == dept) & (catalog['#'] == num) & (catalog['Sec'] == int(sect))])
     return (catalog.loc[(catalog['Dept'] == dept) & (catalog['#'] == num) & (catalog['Sec'] == int(sect))])['CRN'].tolist()[0]
 
 def getNumber(crn):

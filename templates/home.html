@@ -1,23 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="col-md-8">
+<body style="padding-top: 55px;">
+    <main role="main">
         <div class="content-section">
+            <h1 style="color: cornflowerblue;">Welcome to the Connecticut College Class Scheduler!</h1>
+            <br/>
+            <h3>About the CC Class Scheduler and Researchers</h3>
+            <p>
+                This course scheduler is part of a research project conducted by senior Computer Science major and Psychology minor Chelsea Vickers '21, advised by Professor Christine Chung, for COM 495 and COM 496.
+                This software was designed to help students visually plan out their schedules for an upcoming semester by integrating course information from the Registrar to eliminate the potential of copying over
+                course information over when planning a schedule.
+            </p>
+            </br>
+            <h3>How to Use the CC Class Scheduler</h3>
+            <ul>
+                <li>To start building your schedule for the upcoming semester, click the "Start Scheduling!" button below.</li>
+                <li>On the right side of calendar page there is a form where you can indicate the subject of a course and then the dropdown
+                    below that will populate with course offerings for the department you selected for the upcoming semester.</li>
+                <li>Once you have selected a course, press the "Add Course" button to add the course to your schedule. After you add a course, the scheduler will update your calendar view so you can visualize your weekly class schedule!</li>
+                <li>If you would like to start over, press the "Clear Course Selection" button.</li>
+            </ul>
+            </br>
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
-                    <legend>Select a Course</legend>
                     <div class="form-group">
-                        {{ form.course.label(class="form-control-label") }}
-                        {{ form.course(class="form-control form-control-lg") }}
+                        {{ form.start(class="btn btn-outline-info") }}
                     </div>
                 </fieldset>
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
-                </div>
             </form>
         </div>
-        {% if error %}
-            <p class=error><strong>Error:</strong> {{ error }}
-        {% endif %}
-    </div>
+    </main>
+</body>
 {% endblock content %}
