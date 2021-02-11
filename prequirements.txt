@@ -1,28 +1,31 @@
-astroid @ file:///opt/concourse/worker/volumes/live/21fd14a9-2a7e-484b-7394-5a9912cdcf80/volume/astroid_1592498459180/work
+astroid==2.4.2
 cachelib==0.1.1
 certifi==2020.12.5
 click==7.1.2
 Flask==1.1.2
 Flask-Session==0.3.2
 Flask-WTF==0.14.3
-isort @ file:///opt/concourse/worker/volumes/live/97586196-dd0e-4a3f-4d06-330d40d66119/volume/isort_1601490198153/work
+isort==5.5.4
 itsdangerous==1.1.0
 Jinja2==2.11.2
 jsonify==0.5
 lazy-object-proxy==1.4.3
-MarkupSafe @ file:///opt/concourse/worker/volumes/live/cb778296-98db-45ad-411e-6f726e102dc3/volume/markupsafe_1594371638608/work
+MarkupSafe==1.1.1
 mccabe==0.6.1
 mkl-fft==1.2.0
 mkl-random==1.1.1
 mkl-service==2.3.0
 mod-wsgi==4.7.1
-numpy @ file:///opt/concourse/worker/volumes/live/c646f6b9-b398-438d-7dc7-c7142e0ba44b/volume/numpy_and_numpy_base_1596235504536/work
-pandas @ file:///opt/concourse/worker/volumes/live/f615845e-c5fe-4fc8-4a20-aedb5c26671e/volume/pandas_1601567264760/work
-pylint @ file:///opt/concourse/worker/volumes/live/ed0164b6-bcc7-4f6b-7dd4-ad89660b5dcb/volume/pylint_1598624018129/work
+numpy==1.19.1
+pandas==1.1.2
+pip==20.3.3
+pylint==2.6.0
 python-dateutil==2.8.1
 pytz==2020.1
+setuptools==49.6.0.post20200925
 six==1.15.0
-toml @ file:///tmp/build/80754af9/toml_1592853716807/work
+toml==0.10.1
 Werkzeug==1.0.1
+wheel==0.35.1
 wrapt==1.11.2
-WTForms @ file:///tmp/build/80754af9/wtforms_1597707484216/work
+WTForms==2.3.3
