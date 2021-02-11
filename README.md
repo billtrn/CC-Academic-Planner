@@ -1,16 +1,16 @@
-# Course-Scheduler
+# Academic Planner
 Connecticut College CS Research project 2020-2021
 
 Researcher: Chelsea Vickers, advised by Professor Christine Chung
 
 ## Instructions for how to download and extract the code files:
-1. On the GitHub repository page for this project (presumably the page you are currently reading this on: https://github.com/cvickers23/Course-Scheduler), click the green "Code" download button near the top right. In the drop down menu that appears, click "Download ZIP" and a compressed folder in the form of a ZIP file with all the project files will begin to download.
+1. On the GitHub repository page for this project (presumably the page you are currently reading this on: https://github.com/cvickers23/CC-Academic-Planner), click the green "Code" download button near the top right. In the drop down menu that appears, click "Download ZIP" and a compressed folder in the form of a ZIP file with all the project files will begin to download.
 
 2. Once the file has downloaded, extract the folder from the ZIP file in your "Downloads" folder, or wherever your downloaded files are saved on your machine, by doing one of the following:
     - Mac: Double click on the ZIP file to extract it.
     - Windows: Right click the ZIP file and select "Extract all" to extract it.
     
-3. Right-click on the extracted folder (it should be called "Course-Scheduler-master" or "Course-Scheduler") and do one of the following:
+3. Right-click on the extracted folder (it should be called "CC-Academic-Planner-master" or "CC-Academic-Planner") and do one of the following:
     - Mac Option 1: Right-click on the folder and select "New Terminal at Folder" from the drop down menu.
     - Mac Option 2: Open up Terminal and cd to the folder.
     - Windows Option 1: Press Shift + right-click the folder and then select "Open command window here" from the drop down menu. If this option is not available, you can add it by following the steps given here: https://www.groovypost.com/howto/microsoft/vista/add-command-prompt-option-to-explorer-context-menu/.
