@@ -641,7 +641,7 @@
                                     b+=1;
                                 }
                                 document.getElementById(d+start).rowSpan = b+1;
-                                document.getElementById(d+start).innerHTML = course.dept + " " + course.number + "<br>" + course.title + "<br>" + start_string + " - " + end_string + "<br> CRN: " + course.crn;
+                                document.getElementById(d+start).innerHTML = course.dept + " " + course.number + "<br>" + course.title + "<br>" + start_string + " - " + end_string + "<br> CRN: " + course.crn + '<br> <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
                                 color = j%10;
                                 document.getElementById(d+start).className = colors[color];
 
@@ -688,11 +688,25 @@
                 </div>
             </form>
         </div>
-        <div>
+        <!-- <div>
             <form method="POST" action="">
                 {{ cform.hidden_tag() }}
                 <div class="form-group">
                     {{ cform.clear(class="btn btn-poutline-info") }}
+                </div>
+            </form>
+        </div> -->
+        <div>
+            <form method="POST" action="">
+                {{ rform.hidden_tag() }}
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        {{ rform.selcourses.label(class="form-control-label") }}
+                        {{ rform.selcourses(class="form-control form-control-lg", style="font-size: small") }}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ rform.rem(class="btn btn-poutline-info") }}
                 </div>
             </form>
         </div>

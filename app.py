@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for
-from forms import CourseForm, ClearForm, StartForm
+from forms import CourseForm, ClearForm, StartForm, RemoveForm
 import data
 
 app = Flask(__name__)
@@ -87,6 +87,11 @@ def calendar():
     else:
         form.course.choices = data.getDeptCourses(form.department.data)
     form_clear = ClearForm()
+    form_remove = RemoveForm()
+    ch = []
+    for c in courses:
+        ch.append((c["title"],c["title"]))
+        form_remove.selcourses.choices = ch
     error = None
 
     #if the form is submitted validly
@@ -98,6 +103,7 @@ def calendar():
             #if the course does not conflict with any pre-selected classes, add it to the class schedule
             if conflict(course) is False:
                 courses.append(course)
+                form_remove.selcourses.choices.append((course["title"],course["title"]))
 
             #if there are one or more conflicts with the current class schedule, do not add it and report conflict
             else:
@@ -106,8 +112,16 @@ def calendar():
         if form_clear.validate_on_submit():
             if form_clear.clear.data:
                 courses = []
+        
+        if form_remove.validate_on_submit():
+            if form_remove.rem.data:
+                for s in form_remove.selcourses.data:
+                    for i in courses:
+                        if i["title"] == s:
+                            courses.remove(i)
+                            form_remove.selcourses.choices.remove((s,s))
 
-    return render_template('calendar.html', title='Calendar', form=form, cform = form_clear, courses=courses, error=error)
+    return render_template('calendar.html', title='Calendar', form=form, cform = form_clear, rform = form_remove, courses=courses, error=error)
 
 @app.route('/course/<dept>')
 def course(dept):

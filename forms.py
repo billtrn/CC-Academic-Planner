@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, SubmitField
+from wtforms import SelectField, SubmitField, SelectMultipleField
 import data
 
 DEPT_CHOICES = data.getDepartmentList()
@@ -16,3 +16,7 @@ class ClearForm(FlaskForm):
 
 class StartForm(FlaskForm):
     start = SubmitField('Start Scheduling!')
+
+class RemoveForm(FlaskForm):
+    selcourses = SelectMultipleField(label='Selected Courses', choices = [])
+    rem = SubmitField('Remove course(s)')
