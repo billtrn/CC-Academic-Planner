@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import SelectField, SubmitField, SelectMultipleField
 import data
 
-DEPT_CHOICES = data.getDepartmentList()
+DEPT_CHOICES = sorted(data.getDepartmentList())
 DEPT_CHOICES.insert(0,'ALL DEPTS')
 COURSE_CHOICES = data.getCourseList()
 

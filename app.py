@@ -1,11 +1,14 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 from forms import CourseForm, ClearForm, StartForm, RemoveForm
+#from flask_cas import CAS
 import data
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '9ea87e4f94007164efd29eab1793d57f'
-app.config['TEMPLATES_AUTO_RELOAD'] = True
+#app.config['TEMPLATES_AUTO_RELOAD'] = True
+#app.config['CAS_SERVER'] = 'https://cas.conncoll.edu'
+#app.config['CAS_AFTER_LOGIN'] = 'route_root'
 
 courses = []
 
@@ -41,7 +44,9 @@ def conflict(course):
             for y in range(len(c["days"])):
 
                 #if the two groupings do not share a day, no need to check for time conflict
-                if len(set(course["days"][x]).intersection(set(c["days"][y]))) == 0:
+                intersection = set(course["days"][x]).intersection(set(c["days"][y]))
+                
+                if len(intersection) == 0 or intersection == {' '}:
                     continue
 
                 #check for time conflict
