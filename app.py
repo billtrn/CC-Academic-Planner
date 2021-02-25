@@ -1,7 +1,8 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for, session
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session, make_response
 from forms import CourseForm, ClearForm, StartForm, RemoveForm
 #from flask_cas import CAS
 import data
+import json
 
 app = Flask(__name__)
 
@@ -10,7 +11,7 @@ app.config['SECRET_KEY'] = '9ea87e4f94007164efd29eab1793d57f'
 #app.config['CAS_SERVER'] = 'https://cas.conncoll.edu'
 #app.config['CAS_AFTER_LOGIN'] = 'route_root'
 
-courses = []
+#courses = []
 
 #function to format form.course.data into a dictionary of data for the course
 def fmat(course):
@@ -27,7 +28,7 @@ def fmat(course):
     return {"title": title, "crn": crn, "dept": dept, "number": num, "days": days, "times": times}
 
 #function to check if the course has a conflict with an already selected course
-def conflict(course):
+def conflict(course, courses):
     #if no courses have been added yet, no conflicts
     if len(courses) == 0:
         return False
@@ -85,7 +86,10 @@ def home():
 
 @app.route("/calendar", methods=['GET', 'POST'])
 def calendar():
-    global courses
+    #global courses
+    cookies = request.cookies
+    cs = json.loads(cookies.get("courses"))
+
     form = CourseForm()
     if form.department.data == None:
         form.course.choices = data.getDeptCourses('ALL DEPTS')
@@ -93,11 +97,15 @@ def calendar():
         form.course.choices = data.getDeptCourses(form.department.data)
     form_clear = ClearForm()
     form_remove = RemoveForm()
+    
     ch = []
-    for c in courses:
+    #for c in courses:
+    for c in cs:
         ch.append((c["title"],c["title"]))
         form_remove.selcourses.choices = ch
+    
     error = None
+
 
     #if the form is submitted validly
     if request.method == 'POST':
@@ -106,27 +114,29 @@ def calendar():
             course = fmat(form.course.data)
 
             #if the course does not conflict with any pre-selected classes, add it to the class schedule
-            if conflict(course) is False:
-                courses.append(course)
+            if conflict(course, cs) is False:
+                #courses.append(course)
+                cs.append(course)
                 form_remove.selcourses.choices.append((course["title"],course["title"]))
 
             #if there are one or more conflicts with the current class schedule, do not add it and report conflict
             else:
                 error = 'The selected class, ' + course["title"] + ' (' + ''.join(course["days"]) + ', ' + ''.join(course["times"]) + '),' + ' conflicts with one or more classes in your current schedule.'
-
-        if form_clear.validate_on_submit():
-            if form_clear.clear.data:
-                courses = []
         
         if form_remove.validate_on_submit():
             if form_remove.rem.data:
                 for s in form_remove.selcourses.data:
-                    for i in courses:
+                    #for i in courses:
+                    for i in cs:
                         if i["title"] == s:
-                            courses.remove(i)
+                            #courses.remove(i)
+                            cs.remove(i)
                             form_remove.selcourses.choices.remove((s,s))
 
-    return render_template('calendar.html', title='Calendar', form=form, cform = form_clear, rform = form_remove, courses=courses, error=error)
+    res = make_response(render_template('calendar.html', title='Calendar', form=form, cform = form_clear, rform = form_remove, error=error, courses=cs))
+    res.set_cookie("courses", json.dumps(cs))
+    
+    return res
 
 @app.route('/course/<dept>')
 def course(dept):
@@ -134,4 +144,4 @@ def course(dept):
     return jsonify({'courses' : cs})
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True)
