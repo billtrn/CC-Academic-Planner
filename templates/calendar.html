@@ -586,9 +586,7 @@
                 var ds = ["M", "T", "W", "R", "F", "S", "SU"];
                 var colors = ["course-one", "course-two", "course-three", "course-four", "course-five", "course-six", "course-seven", "course-eight", "course-nine", "course-ten"]
                 var courses = JSON.parse('{{ courses | tojson | safe }}');
-                console.log(courses);
                 for(j=0; j<courses.length; j++){
-                    console.log(j)
                     var course = courses[j];
                     var times = course.times;
                     var days = course.days;

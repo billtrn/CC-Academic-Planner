@@ -25,6 +25,13 @@ def fmat(course):
     days = data.getDays(crn)
     times = data.getTimes(crn)
 
+    #gets rid of any duplicate day/time pairs due to the use of multiple classrooms
+    for i in range(len(days)-1):
+        for j in range(i+1,len(days)):
+            if days[i] == days[j] and times[i] == times[j]:
+                del days[j]
+                del times[j]
+
     return {"title": title, "crn": crn, "dept": dept, "number": num, "days": days, "times": times}
 
 #function to check if the course has a conflict with an already selected course
