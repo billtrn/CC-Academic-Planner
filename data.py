@@ -60,3 +60,6 @@ def getTimes(crn):
         times.append(catalog.loc[catalog['CRN'] == crn]['Time3'].tolist()[0])
 
     return times
+
+def getCredits(crn):
+    return catalog.loc[catalog['CRN'] == crn]['Credits'].tolist()[0]

@@ -13,42 +13,32 @@ body {
     padding-left: 2rem;
     font-family: -system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
-
-/* .tableFixHead {
-  overflow-y: auto;
-  height: 106px;
-}
-.tableFixHead thead th {
-  position: sticky;
-  top: 0;
-} */
-/* .tableWrapper {
-  position:relative;
-  width:100%;
-  min-height:1px;
-  padding-right:15px;
-  padding-left:15px;
-  -webkit-box-flex:0;
-  -ms-flex:0 0 75%;
-  flex:0 0 75%;
-  max-width:75%;
-} */
-
 table {
   width: 100%;
   table-layout: fixed;
   padding-left: 2rem;
 }
+table tbody {
+  display: block;
+  overflow: auto;
+  /* height: 600px; */
+  height: 85vh;
+}
+table thead {
+  display: block;
+}
+/* table thead tr th {
+  width: 13.75%;
+} */
 table th,
-table td {
-  width: 100%;
+table td{
+  /* width: 12.5%; */
+  width: 123px;
   text-align: center;
   border-bottom: thin dotted #ccc;
   padding: 0.15rem;
 }
 table th {
-  /* position: sticky; */
-  /* top: 0; */
   font-weight: bold;
   font-size: medium;
 }
@@ -113,4 +103,42 @@ table td > span {
 
 #smaller {
   font-size: small;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, SubmitField, SelectMultipleField
+from wtforms import SelectField, SubmitField, SelectMultipleField, BooleanField
 import data
 
 DEPT_CHOICES = sorted(data.getDepartmentList())
@@ -15,8 +15,19 @@ class ClearForm(FlaskForm):
     clear = SubmitField('Clear Course Selection')
 
 class StartForm(FlaskForm):
-    start = SubmitField('Start Scheduling!')
+    cb = BooleanField(label="Don't show this again")
+    start = SubmitField('Start Planning!')
 
 class RemoveForm(FlaskForm):
     selcourses = SelectMultipleField(label='Selected Courses', choices = [])
-    rem = SubmitField('Remove course(s)')
+    submit = SubmitField('Remove course(s)')
+
+class RecommendForm(FlaskForm):
+    mon = BooleanField(label='Monday')
+    tues = BooleanField(label='Tuesday')
+    wed = BooleanField(label='Wednesday')
+    thurs = BooleanField(label='Thursday')
+    fri = BooleanField(label='Friday')
+    sat = BooleanField(label='Saturday')
+    sun = BooleanField(label='Sunday')
+    

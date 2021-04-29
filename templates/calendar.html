@@ -1,5 +1,79 @@
 {% extends "layout.html" %}
 {% block content %}
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <br/>
+        <h2 class="text-primary" style="text-align:center;">Welcome to the CC Academic Planner!</h2>
+        </br>
+        <ul>
+            <li style="margin-bottom: 10px">The CC Academic Planner is for planning purposes <strong>only</strong>. Adding a class to a schedule on here <strong>DOES NOT</strong> register you for that class!</li>
+                <ul>
+                    <li style="margin-bottom: 10px">Please visit the <a href="https://www.conncoll.edu/academics/registrar/course-registration/">Connecticut College registration page</a> for information regarding registering for classes.</li>
+                </ul>
+            <li style="margin-bottom: 10px;"><a href="/how-to">How To:</a></li>
+                <ul>
+                    <li style="margin-bottom: 10px">Once you have selected a course from the dropdown lists on the right side of the page, press the "Add Course" button to add the course to your schedule. After you add a course, the planner will update your calendar view so you can visualize your weekly class schedule!</li>
+                    <li style="margin-bottom: 10px">If you would like to remove a course (or multiple courses), select the course(s) in the "Selected Courses" box that you would like to remove, and then click the "Remove course(s)" button.</li>
+                    <ul>
+                        <li style="margin-bottom: 10px"><i>In order to select multiple courses from the box, you can hold down the Ctrl (PC) or Command (Mac) key and then click on each course you want to select.</i></li>
+                    </ul>
+                </ul>
+            <li>This web application was built as part of a research project by Chelsea Vickers '21, advised by Professor Chung. You can read more about this on the <a href="/about">About</a> page.</li>
+        </ul>
+        <!-- <p style="text-align: center;"><input class="form-check-input" type="checkbox" value="" id="check"><label class="form-check-label" for="defaultCheck1">Don't show this again</label></p> -->
+        <form method="POST" action="" style="text-align:center">
+            {{ modalform.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    <!-- {{ modalform.cb }}
+                    {{ modalform.cb.label }} -->
+                    </br>
+                    {{ modalform.start(class="btn btn-outline-primary") }}
+                </div>
+            </fieldset>
+        </form>
+        <!-- <script>
+            let cb = document.getElementById('check');
+
+            cb.onchange = function() {
+                v = cb.value;
+                document.cookie = "modal=v"
+            }
+        </script>
+        <script>
+            const cb = document.getElementById('check');
+            console.log(cb.checked);
+        </script> -->
+    </div>
+  
+</div>
+<script>
+    var m = JSON.parse('{{ m | tojson | safe }}');
+    if(m == "first" || m == "yes"){
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        modal.style.display = "block";
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+</script>
 <div class="row">
     <div class="col-md-9">
         <head>
@@ -9,7 +83,7 @@
         <body>
             <!-- <h2 class="text-primary">Connecticut College Academic Planner<br/></h2> -->
             <table>
-                <body>
+                <thead>
                     <tr>
                         <th>Time</th>
                         <th>MON</th>
@@ -20,6 +94,8 @@
                         <th>SAT</th>
                         <th>SUN</th>
                     </tr>
+                </thead>
+                <tbody>
                     <tr>
                         <td>8:00 AM</td>
                         <td id="M800"></td>
@@ -580,7 +656,17 @@
                         <td id="S2145"></td>
                         <td id="SU2145"></td>
                     </tr>
-                </body>
+                    <tr>
+                        <td>10:00 PM</td>
+                        <td id="M2200"></td>
+                        <td id="T2200"></td>
+                        <td id="W2200"></td>
+                        <td id="R2200"></td>
+                        <td id="F2200"></td>
+                        <td id="S2200"></td>
+                        <td id="SU2200"></td>
+                    </tr>
+                </tbody>
             </table>
             <script>
                 var ds = ["M", "T", "W", "R", "F", "S", "SU"];
@@ -626,7 +712,7 @@
                                 }
                                 var i = start;
                                 var b = 0;
-                                while(i < end){
+                                while(i <= end){
                                     if(b>0){
                                         document.getElementById(d+i).remove();
                                     }
@@ -638,7 +724,7 @@
                                     }
                                     b+=1;
                                 }
-                                document.getElementById(d+start).rowSpan = b+1;
+                                document.getElementById(d+start).rowSpan = b;
                                 document.getElementById(d+start).innerHTML = course.dept + " " + course.number + "<br>" + course.title + "<br>" + start_string + " - " + end_string + "<br> CRN: " + course.crn;
                                 color = j%10;
                                 document.getElementById(d+start).className = colors[color];
@@ -651,6 +737,10 @@
         </body>
     </div>
     <div class="col-md-3">
+        <div>
+            <p>Credits: {{ creds }}</p>
+            <p>Attributes: {{ attributes }}</p>
+        </div>
         <div class="content-section">
             <h4>Add a course</h4>
             <form method="POST" action="">
@@ -686,15 +776,22 @@
                 </div>
             </form>
         </div>
-        <!-- <div>
-            <form method="POST" action="">
-                {{ cform.hidden_tag() }}
-                <div class="form-group">
-                    {{ cform.clear(class="btn btn-poutline-info") }}
-                </div>
-            </form>
-        </div> -->
+        <script>
+            function conflictMessage(){
+                var str = '{{ error }}'
+                var newstring = str.replace(/&amp;/g, "&");
+                window.alert(newstring);
+            }
+        </script>
+        {% if error %}
         <div>
+            <button type="button" onclick="conflictMessage()" class="btn btn-outline-danger">&#9432;&nbsp;<strong>&nbsp;CONFLICT: {{ conf }}</strong></button>
+        </div>
+        <script>
+            setTimeout(() => { conflictMessage() }, 250);
+        </script>
+        {% endif %}
+        <div style="margin-top:15px">
             <form method="POST" action="">
                 {{ rform.hidden_tag() }}
                 <fieldset class="form-group">
@@ -703,14 +800,17 @@
                         {{ rform.selcourses(class="form-control form-control-lg", style="font-size: small") }}
                     </div>
                 </fieldset>
+                <script>
+                    function removeInstructions(){
+                        window.alert('To remove courses, select the desired course(s) in the "Selected Courses" box above and then click the "Remove course(s)" button.');
+                    }
+                </script>
                 <div class="form-group">
-                    {{ rform.rem(class="btn btn-poutline-info") }}
+                    {{ rform.submit(class="btn btn-poutline-info") }}
+                    <button type="button" onclick="removeInstructions()" class="btn btn-outline-primary btn-sm" display="inline">&#9432;</button>
                 </div>
             </form>
         </div>
-        {% if error %}
-            <p class=error><strong>CONFLICT:</strong> {{ error }}
-        {% endif %}
     </div>
 </div>
 {% endblock content %}
