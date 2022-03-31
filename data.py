@@ -1,65 +1,81 @@
-import pandas as pd
-import numpy as np
+import json
 
-catalog = pd.read_csv('updatedspring21.csv')
-catalog = catalog.replace(np.nan, '', regex=True)
-attributes = pd.read_csv('updatedspring21attributes.csv')
+with open("classes.json", "r") as f:
+    course_data = json.load(f)
 
-def toString(i):
-    return catalog['Dept'][i] + "  " + catalog['#'][i] + "  " + catalog['TITLE'][i] + "  " + str(catalog['Sec'][i])
+
+def toString(crn):
+    return "  ".join(
+        [
+            course_data[crn]["dept"],
+            course_data[crn]["code"],
+            course_data[crn]["name"],
+            course_data[crn]["section"],
+        ]
+    )
+
 
 def getDepartmentList():
-    return catalog['Dept'].unique().tolist()
+    departments = set()
+    for course in course_data:
+        departments.add(course_data[course]["dept"])
+    return list(departments)
+
 
 def getCourseList():
-    cl = []
-    for i in range(catalog.shape[0]):
-        cl.append(toString(i))
-    return cl
+    courses = []
+    for course in course_data:
+        courses.append(toString(course))
+    return courses
+
 
 def getDeptCourses(dept):
-    if dept == 'ALL DEPTS':
+    if dept == "ALL DEPTS":
         return getCourseList()
     else:
-        dc = catalog[catalog['Dept'] == dept]
-        l = []
-        for index, row in dc.iterrows():
-            l.append(toString(index))
-        return l
+        dept_courses = []
+        for course in course_data:
+            if course_data[course]["dept"] == dept:
+                dept_courses.append(toString(course))
+        return dept_courses
+
 
 def getAttr(crn):
-    return attributes.loc[attributes['SSRATTR_CRN'] == crn]['SSRATTR_ATTR_CODE'].tolist()
+    return course_data[crn]["attrs"]
+
 
 def getCRN(dept, num, sect):
-    return (catalog.loc[(catalog['Dept'] == dept) & (catalog['#'] == num) & (catalog['Sec'] == int(sect))])['CRN'].tolist()[0]
+    for course in course_data:
+        if course_data[course]["dept"] == dept and \
+                course_data[course]["code"] == num and \
+                course_data[course]["section"] == sect:
+            return course
 
-def getNumber(crn):
-    return catalog.loc[catalog['CRN'] == crn]['#'].tolist()[0]
-
-def getDepartment(crn):
-    return catalog.loc[catalog['CRN'] == crn]['Dept'].tolist()[0]
 
 def getDays(crn):
-    days = [catalog.loc[catalog['CRN'] == crn]['Days1'].tolist()[0]]
+    dates = course_data[crn]["date"]
+    if len(dates) >= 2:
+        return [" ".join(dates)]
+    else:
+        return [" ".join(dates[0])]
 
-    if catalog.loc[catalog['CRN'] == crn]['Days2'].tolist()[0] != "":
-        days.append(catalog.loc[catalog['CRN'] == crn]['Days2'].tolist()[0])
-
-    if catalog.loc[catalog['CRN'] == crn]['Days3'].tolist()[0] != "":
-        days.append(catalog.loc[catalog['CRN'] == crn]['Days3'].tolist()[0])
-
-    return days
 
 def getTimes(crn):
-    times = [catalog.loc[catalog['CRN'] == crn]['Time1'].tolist()[0]]
-
-    if catalog.loc[catalog['CRN'] == crn]['Time2'].tolist()[0] != "-":
-        times.append(catalog.loc[catalog['CRN'] == crn]['Time2'].tolist()[0])
-
-    if catalog.loc[catalog['CRN'] == crn]['Time3'].tolist()[0] != "-":
-        times.append(catalog.loc[catalog['CRN'] == crn]['Time3'].tolist()[0])
-
+    times = []
+    for time in course_data[crn]["time"]:
+        start, end = time.split(" - ")
+        times.append(f"{_convert_time(start)}-{_convert_time(end)}")
     return times
 
+
 def getCredits(crn):
-    return catalog.loc[catalog['CRN'] == crn]['Credits'].tolist()[0]
+    return int(float(course_data[crn]["credits"]))
+
+
+def _convert_time(time):
+    time_, sign = time.strip().split()
+    hour, minute = time_.split(":")
+    if sign == "pm":
+        return (12 + int(hour)) * 100 + int(minute)
+    else:
+        return int(hour) * 100 + int(minute)
