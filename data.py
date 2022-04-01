@@ -76,6 +76,10 @@ def _convert_time(time):
     time_, sign = time.strip().split()
     hour, minute = time_.split(":")
     if sign == "pm":
-        return (12 + int(hour)) * 100 + int(minute)
+        return str((12 + int(hour)) * 100 + int(minute))
     else:
-        return int(hour) * 100 + int(minute)
+        converted_time = int(hour) * 100 + int(minute)
+        if converted_time < 1000:
+            return "0" + str(converted_time)
+        else:
+            return str(converted_time)
