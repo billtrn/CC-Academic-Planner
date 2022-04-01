@@ -41,9 +41,9 @@ def getDeptCourses(dept):
 
 
 def getAttr(crn):
-    attrs = course_data[crn]["attrs"]
+    attrs = course_data[crn]["attrs"].strip()
     if attrs:
-        return course_data[crn]["attrs"].strip().split(", ")
+        return attrs.split(", ")
     else:
         return []
 
