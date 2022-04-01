@@ -1,3 +1,3 @@
 #!/bin/bash
-source /home/user/venv/bin/activate
-python /home/user/classes.py
+source /Users/bill/Code/CC-Planner/venv/bin/activate
+python /Users/bill/Code/CC-Planner/classes.py
