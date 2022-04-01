@@ -57,11 +57,7 @@ def getCRN(dept, num, sect):
 
 
 def getDays(crn):
-    dates = course_data[crn]["date"]
-    if len(dates) >= 2:
-        return [" ".join(dates)]
-    else:
-        return [" ".join(dates[0])]
+    return course_data[crn]["date"]
 
 
 def getTimes(crn):
@@ -80,7 +76,10 @@ def _convert_time(time):
     time_, sign = time.strip().split()
     hour, minute = time_.split(":")
     if sign == "pm":
-        return str((12 + int(hour)) * 100 + int(minute))
+        if int(hour) == 12:
+            return str((int(hour) * 100 + int(minute)))
+        else:
+            return str((12 + int(hour)) * 100 + int(minute))
     else:
         converted_time = int(hour) * 100 + int(minute)
         if converted_time < 1000:
