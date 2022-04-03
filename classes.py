@@ -132,7 +132,7 @@ def parse_data(fetched_content: bytes) -> Dict[str, Dict]:
             "dept": cls[1].string.strip(),
             "code": cls[2].string.strip(),
             "section": cls[3].string.strip(),
-            "name": cls[6].string.strip(),
+            "name": " ".join(cls[6].string.strip().split()),
             "date": cls[8].get_text(separator=date_time_separator).strip().split(date_time_separator),
             "time": cls[9].get_text(separator=date_time_separator).strip().split(date_time_separator),
             "instructor": cls[-1].string.strip() if cls[-1].string else None,
