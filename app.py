@@ -173,9 +173,9 @@ def calendar():
         render_template("calendar.html", title="Calendar", modalform=modalform, form=form, cform=form_clear,
                         rform=form_remove, error=error, courses=cs, creds=credits, attributes=attr, conf=conf, m=m)
     )
-    res.set_cookie("courses", json.dumps(cs))
-    res.set_cookie("credits", json.dumps(credits))
-    res.set_cookie("modal", json.dumps(m))
+    res.set_cookie("courses", json.dumps(cs), secure=True, httponly=True, samesite='Lax')
+    res.set_cookie("credits", json.dumps(credits), secure=True, httponly=True, samesite='Lax')
+    res.set_cookie("modal", json.dumps(m), secure=True, httponly=True, samesite='Lax')
 
     return res
 
