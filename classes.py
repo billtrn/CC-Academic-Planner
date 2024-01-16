@@ -114,7 +114,7 @@ def fetch_data() -> bytes:
         "sel_title": "",
         "sel_to_cred": ""
     }
-    r = requests.post(url, headers=headers, data=data)
+    r = requests.post(url, headers=headers, data=data, timeout=60)
     return r.content
 
 
